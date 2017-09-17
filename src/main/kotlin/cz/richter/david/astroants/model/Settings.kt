@@ -1,8 +1,16 @@
 package cz.richter.david.astroants.model
 
-data class Settings(val astroants: Astroants,
-               val id: String,
-               val map: MapStrings,
-               val sugar: Sugar,
-               val startedTimestamp: Long)
+import com.fasterxml.jackson.annotation.JsonProperty
+
+data class Settings(
+        @JsonProperty("astroants")
+        val astroants: Astroants,
+        @JsonProperty("id")
+                    val id: String,
+        @JsonProperty("map")
+                    val map: MapStrings,
+        @JsonProperty("sugar")
+                    val sugar: Sugar,
+        @JsonProperty("startedTimestamp")
+                    val startedTimestamp: Long)
 

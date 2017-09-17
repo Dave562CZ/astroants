@@ -1,4 +1,9 @@
 package cz.richter.david.astroants.model
 
-data class Sugar(val x: Int,
-            val y: Int)
+import com.fasterxml.jackson.annotation.JsonProperty
+
+data class Sugar(
+        @JsonProperty("x")
+        val x: Int,
+        @JsonProperty("y")
+        val y: Int)
