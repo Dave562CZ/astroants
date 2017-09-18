@@ -4,53 +4,34 @@ import cz.richter.david.astroants.model.Astroants
 import cz.richter.david.astroants.model.MapSettings
 import cz.richter.david.astroants.model.Path
 import cz.richter.david.astroants.model.Sugar
+import es.usc.citius.hipster.algorithm.Algorithm
 import es.usc.citius.hipster.algorithm.Hipster
 import es.usc.citius.hipster.graph.GraphSearchProblem
-import es.usc.citius.hipster.graph.HashBasedHipsterDirectedGraph
-import kotlin.system.measureNanoTime
+import es.usc.citius.hipster.graph.HipsterDirectedGraph
 
-class Dijkstra : ShortestPathFinder {
-    override fun find(map: List<MapSettings>, astroants: Astroants, sugar: Sugar): List<MapSettings> {
-        val graph = HashBasedHipsterDirectedGraph.create<MapSettings, Int>()
+class Dijkstra(private val hipsterGraphCreator: HipsterGraphCreator) : ShortestPathFinder {
+
+    override fun find(map: List<MapSettings>, astroants: Astroants, sugar: Sugar): List<Path> {
         val graphSize = Math.sqrt(map.size.toDouble()).toInt()
-        val graphConstructionNanos = measureNanoTime {
-            for (mapSettings in map) {
-                for (path in mapSettings.paths) {
-                    val destIndex = when (path) {
-                        Path.UP -> convertCoordinatesToIndex(mapSettings.x, mapSettings.y - 1, graphSize)
-                        Path.DOWN -> convertCoordinatesToIndex(mapSettings.x, mapSettings.y + 1, graphSize)
-                        Path.LEFT -> convertCoordinatesToIndex(mapSettings.x - 1, mapSettings.y, graphSize)
-                        Path.RIGHT -> convertCoordinatesToIndex(mapSettings.x + 1, mapSettings.y, graphSize)
-                    }
-                    val destSettings = map[destIndex]
-                    graph.add(mapSettings)
-                    graph.add(destSettings)
-                    graph.connect(mapSettings, destSettings, destSettings.weight)
-                }
-            }
-        }
-        println(graphConstructionNanos)
+        val graph: HipsterDirectedGraph<MapSettings, Pair<Int, Path>> = hipsterGraphCreator.constructHipsterGraph(map, graphSize)
+
         val problem = GraphSearchProblem
                 .startingFrom(map[convertCoordinatesToIndex(astroants.x, astroants.y, graphSize)])
                 .`in`(graph)
-                .takeCostsFromEdges()
+                .extractCostFromEdges { it.first.toDouble() }
                 .build()
+
         val dijkstra = Hipster.createDijkstra(problem).search(map[convertCoordinatesToIndex(sugar.x, sugar.y, graphSize)])
-        println("dijkstra = ${dijkstra}")
+        println("dijkstra = $dijkstra")
+
         val astar = Hipster.createAStar(problem).search(map[convertCoordinatesToIndex(sugar.x, sugar.y, graphSize)])
-        println("astar = ${astar}")
-        val bellmanFord = Hipster.createBellmanFord(problem).search(map[convertCoordinatesToIndex(sugar.x, sugar.y, graphSize)])
-        println("bellmanFord = ${bellmanFord}")
+        println("astar = $astar")
 
-
-        return dijkstra.optimalPaths.first()
+        return Algorithm.recoverActionPath(dijkstra.goalNode).map { it.second }
     }
 
     private fun convertCoordinatesToIndex(x: Int, y: Int, graphSize: Int) =
             x % graphSize + y * graphSize
 
 }
-
-private val MapSettings.coordinates: String
-    get() = "${this.x}x${this.y}"
 

@@ -14,16 +14,9 @@ class MapSettingsParserImpl : MapSettingsParser {
         val splitted = string.split("-")
         val weight = splitted[0].toInt()
         val paths = splitted[1].toCharArray().map { Path.fromChar(it) }
-        if (paths.isEmpty()) {
-            return MapSettings(weight, x, y, EnumSet.noneOf(Path::class.java))
-        }
-        return MapSettings(weight, x, y, EnumSet.copyOf(paths))
+        return MapSettings(weight, x, y, paths)
     }
 
-    fun test(mapStrings: MapStrings, gridSize: Int) {
-        StreamSupport.stream(mapStrings.areas.withIndex().spliterator(), true)
-                .map { parse(it.index % gridSize, it.index / gridSize, it.value) }
-    }
 
 }
 

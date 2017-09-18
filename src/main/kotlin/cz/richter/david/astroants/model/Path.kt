@@ -14,4 +14,8 @@ enum class Path {
            }
         }
     }
+
+    fun toResult(): Char {
+        return name[0].toUpperCase()
+    }
 }

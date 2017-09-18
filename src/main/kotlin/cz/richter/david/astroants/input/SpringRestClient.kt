@@ -1,5 +1,6 @@
 package cz.richter.david.astroants.input
 
+import cz.richter.david.astroants.model.ResultPath
 import cz.richter.david.astroants.model.Settings
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -8,5 +9,10 @@ import java.net.URI
 
 @Component
 class SpringRestClient @Autowired constructor(private val sourceUri: URI, private val restTemplate: RestTemplate) : RestClient {
+
     override fun getSettings(): Settings = restTemplate.getForObject(sourceUri, Settings::class.java)
+
+    override fun putResult(id: String, result: ResultPath) {
+        restTemplate.put("$sourceUri/$id", result)
+    }
 }
