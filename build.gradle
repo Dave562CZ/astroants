@@ -3,11 +3,12 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'kotlin'
 apply plugin: 'groovy'
+apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
-targetCompatibility 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -17,11 +18,17 @@ dependencies {
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jre8', version: kotlin_version
     compile "org.jetbrains.kotlin:kotlin-reflect"
     compile "org.springframework.boot:spring-boot-starter-web"
-    compile("org.springframework.boot:spring-boot-starter-actuator")
     compile group: 'es.usc.citius.hipster', name: 'hipster-core', version: '1.0.1'
+    testCompile group: 'org.openjdk.jmh', name: 'jmh-core', version: '1.19'
+    testCompile group: 'org.openjdk.jmh', name: 'jmh-generator-annprocess', version: '1.19'
     testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
     testCompile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.12'
 
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 buildscript {
@@ -34,6 +41,7 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jre8', version: kotlin_version
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_version"
     }
 }

@@ -7,6 +7,10 @@ import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
 
+/**
+ * Copied and changed code from [es.usc.citius.hipster.graph.HashBasedHipsterGraph]
+ * to use ConcurrentHashMap and used kotlin.Sequences instead of internal functions to implement lazy computation of elements
+ */
 open class ConcurrentHashBasedHipsterGraph<V, E> : HipsterMutableGraph<V, E> {
     private var connected: ConcurrentMap<V, MutableSet<GraphEdge<V, E>>> = ConcurrentHashMap(90000)
 

@@ -16,8 +16,7 @@ import java.util.stream.Collectors
 
 import static cz.richter.david.astroants.model.Direction.*
 
-
-class DijkstraTest extends Specification {
+class AStarTest extends Specification {
 
     def "sample map test"() {
         given:
@@ -25,7 +24,7 @@ class DijkstraTest extends Specification {
         def mapSettings = new ConcurrentInputMapParser(new MapLocationParserImpl()).parse(mapStrings)
 
         when:
-        List<Direction> paths = new Dijkstra(new ConcurrentHipsterGraphCreator()).find(mapSettings, new Astroants(1, 0), new Sugar(2, 1))
+        List<Direction> paths = new AStar(new ConcurrentHipsterGraphCreator()).find(mapSettings, new Astroants(1, 0), new Sugar(2, 1))
 
         then:
         paths == [DOWN, LEFT, DOWN, RIGHT, RIGHT, UP]
@@ -38,8 +37,7 @@ class DijkstraTest extends Specification {
         def settings = client.settings
         def mapSettings = new ConcurrentInputMapParser(new MapLocationParserImpl()).parse(settings.map)
         when:
-        List<Direction> paths = new Dijkstra(new ConcurrentHipsterGraphCreator()).find(mapSettings, settings.astroants,
-                settings.sugar)
+        List<Direction> paths = new AStar(new ConcurrentHipsterGraphCreator()).find(mapSettings, settings.astroants, settings.sugar)
         def result = client.putResult(settings.id, getResultPath(paths))
         println result
         then:
@@ -47,8 +45,9 @@ class DijkstraTest extends Specification {
     }
 
     private static ResultPath getResultPath(List<Direction> paths) {
-        //this does not work for some reason in Groovy groovy.lang.MissingMethodException:
-        //No signature of method: static cz.richter.david.astroants.model.ResultPath$Companion.fromPaths() is
+        // this does not work for some reason in Groovy
+        // groovy.lang.MissingMethodException:
+        // No signature of method: static cz.richter.david.astroants.model.ResultPath$Companion.fromPaths() is
         // applicable for argument types: (java.util.ArrayList)
         //return ResultPath.Companion.fromPaths(possibleDirections)
         return new ResultPath(paths.stream().map { it.name()[0] }.collect(Collectors.joining("")))

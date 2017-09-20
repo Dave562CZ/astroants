@@ -6,4 +6,5 @@ data class Astroants(
         @JsonProperty("x")
         val x: Int,
         @JsonProperty("y")
-                val y: Int)
+        val y: Int
+)

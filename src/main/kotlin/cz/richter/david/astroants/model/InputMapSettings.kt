@@ -2,6 +2,7 @@ package cz.richter.david.astroants.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class MapStrings(
+data class InputMapSettings(
         @JsonProperty("areas")
-        val areas: List<String>)
+        val areas: List<String>
+)

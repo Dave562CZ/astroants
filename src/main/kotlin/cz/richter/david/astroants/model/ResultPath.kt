@@ -7,10 +7,12 @@ data class ResultPath(
         val path: String
 ) {
     companion object {
-        fun fromPaths(paths: List<Path>) {
-            paths.asSequence()
-                    .map { it.toResult() }
-                    .joinToString("")
+        fun fromPaths(directions: List<Direction>): ResultPath {
+            return ResultPath(
+                    directions.asSequence()
+                            .map { it.toResult() }
+                            .joinToString("")
+            )
         }
     }
 }
