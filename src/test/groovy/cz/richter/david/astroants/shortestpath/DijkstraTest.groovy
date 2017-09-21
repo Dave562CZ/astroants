@@ -35,7 +35,7 @@ class DijkstraTest extends Specification {
         given:
         sleep(2000)//give it 2 sec to avoid ddos attack protection
         def client = new SpringRestClient(new URI("http://tasks-rad.quadient.com:8080/task"), new RestTemplate())
-        def settings = client.settings
+        def settings = client.world
         def mapSettings = new ConcurrentInputMapParser(new MapLocationParserImpl()).parse(settings.map)
         when:
         List<Direction> paths = new Dijkstra(new ConcurrentHipsterGraphCreator()).find(mapSettings, settings.astroants,

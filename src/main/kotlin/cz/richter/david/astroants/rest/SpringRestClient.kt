@@ -19,7 +19,7 @@ import java.net.URI
 @Component
 class SpringRestClient @Autowired constructor(private val sourceUri: URI, private val restTemplate: RestTemplate) : RestClient {
 
-    override fun getSettings(): World = restTemplate.getForObject(sourceUri, World::class.java)
+    override fun getWorld(): World = restTemplate.getForObject(sourceUri, World::class.java)
 
     override fun putResult(id: String, result: ResultPath): ResultResponse {
         val requestEntity = HttpEntity<ResultPath>(result)

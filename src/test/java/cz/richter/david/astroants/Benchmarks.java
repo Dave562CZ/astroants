@@ -16,17 +16,19 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- # Run complete. Total time: 00:57:04
+ # Run complete. Total time: 00:57:36
 
  Benchmark                            Mode  Cnt    Score   Error  Units
- Benchmarks.aStarConcurrent           avgt  200  114,804 ± 0,870  ms/op
- Benchmarks.aStarSequential           avgt  200  194,227 ± 2,069  ms/op
- Benchmarks.concurrentGraphCreator    avgt  200   32,150 ± 0,354  ms/op
- Benchmarks.dijkstraConcurrent        avgt  200  122,661 ± 1,369  ms/op
- Benchmarks.dijkstraSequential        avgt  200  209,201 ± 2,550  ms/op
- Benchmarks.sequentialGraphCreator    avgt  200  128,193 ± 1,819  ms/op
- Benchmarks.concurrentInputMapParser  avgt  200    9,294 ± 0,065  ms/op
- Benchmarks.sequentialInputMapParser  avgt  200   17,552 ± 0,067  ms/op
+ Benchmarks.aStarConcurrent           avgt  200  115,765 ± 2,673  ms/op
+ Benchmarks.aStarSequential           avgt  200  203,498 ± 3,691  ms/op
+ Benchmarks.concurrentGraphCreator    avgt  200   33,302 ± 0,934  ms/op
+ Benchmarks.concurrentInputMapParser  avgt  200    8,681 ± 0,275  ms/op
+ Benchmarks.dijkstraConcurrent        avgt  200  116,223 ± 1,989  ms/op
+ Benchmarks.dijkstraSequential        avgt  200  202,239 ± 3,281  ms/op
+ Benchmarks.sequentialGraphCreator    avgt  200  125,642 ± 2,102  ms/op
+ Benchmarks.sequentialInputMapParser  avgt  200   17,166 ± 0,188  ms/op
+
+ Note: written in Java because IntelliJ IDEA JMH plugin does not support any other language
  */
 public class Benchmarks {
 
@@ -69,9 +71,9 @@ public class Benchmarks {
 
     /**
      Result "cz.richter.david.astroants.Benchmarks.sequentialGraphCreator":
-     128,193 ±(99.9%) 1,819 ms/op [Average]
-     (min, avg, max) = (117,949, 128,193, 155,633), stdev = 7,704
-     CI (99.9%): [126,374, 130,013] (assumes normal distribution)
+     125,642 ±(99.9%) 2,102 ms/op [Average]
+     (min, avg, max) = (115,606, 125,642, 170,237), stdev = 8,899
+     CI (99.9%): [123,540, 127,744] (assumes normal distribution)
      */
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
@@ -82,9 +84,9 @@ public class Benchmarks {
 
     /**
      Result "cz.richter.david.astroants.Benchmarks.concurrentGraphCreator":
-     32,150 ±(99.9%) 0,354 ms/op [Average]
-     (min, avg, max) = (29,760, 32,150, 37,414), stdev = 1,497
-     CI (99.9%): [31,796, 32,504] (assumes normal distribution)
+     33,302 ±(99.9%) 0,934 ms/op [Average]
+     (min, avg, max) = (29,135, 33,302, 51,585), stdev = 3,955
+     CI (99.9%): [32,368, 34,236] (assumes normal distribution)
      */
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
@@ -95,9 +97,9 @@ public class Benchmarks {
 
     /**
      Result "cz.richter.david.astroants.Benchmarks.dijkstraSequential":
-     209,201 ±(99.9%) 2,550 ms/op [Average]
-     (min, avg, max) = (194,478, 209,201, 242,666), stdev = 10,796
-     CI (99.9%): [206,652, 211,751] (assumes normal distribution)
+     202,239 ±(99.9%) 3,281 ms/op [Average]
+     (min, avg, max) = (184,939, 202,239, 263,239), stdev = 13,893
+     CI (99.9%): [198,958, 205,520] (assumes normal distribution)
      */
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
@@ -108,9 +110,9 @@ public class Benchmarks {
 
     /**
      Result "cz.richter.david.astroants.Benchmarks.aStarSequential":
-     194,227 ±(99.9%) 2,069 ms/op [Average]
-     (min, avg, max) = (177,668, 194,227, 220,101), stdev = 8,762
-     CI (99.9%): [192,158, 196,297] (assumes normal distribution)
+     203,498 ±(99.9%) 3,691 ms/op [Average]
+     (min, avg, max) = (185,484, 203,498, 276,027), stdev = 15,629
+     CI (99.9%): [199,807, 207,190] (assumes normal distribution)
      */
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
@@ -121,9 +123,9 @@ public class Benchmarks {
 
     /**
      Result "cz.richter.david.astroants.Benchmarks.dijkstraConcurrent":
-     122,661 ±(99.9%) 1,369 ms/op [Average]
-     (min, avg, max) = (107,681, 122,661, 141,795), stdev = 5,796
-     CI (99.9%): [121,293, 124,030] (assumes normal distribution)
+     116,223 ±(99.9%) 1,989 ms/op [Average]
+     (min, avg, max) = (104,341, 116,223, 150,994), stdev = 8,423
+     CI (99.9%): [114,234, 118,212] (assumes normal distribution)
      */
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
@@ -134,9 +136,9 @@ public class Benchmarks {
 
     /**
      Result "cz.richter.david.astroants.Benchmarks.aStarConcurrent":
-     114,804 ±(99.9%) 0,870 ms/op [Average]
-     (min, avg, max) = (107,392, 114,804, 123,658), stdev = 3,683
-     CI (99.9%): [113,934, 115,673] (assumes normal distribution)
+     115,765 ±(99.9%) 2,673 ms/op [Average]
+     (min, avg, max) = (104,227, 115,765, 168,011), stdev = 11,316
+     CI (99.9%): [113,093, 118,438] (assumes normal distribution)
      */
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
@@ -147,9 +149,9 @@ public class Benchmarks {
 
     /**
      Result "cz.richter.david.astroants.Benchmarks.sequentialInputMapParser":
-     17,552 ±(99.9%) 0,067 ms/op [Average]
-     (min, avg, max) = (17,009, 17,552, 18,319), stdev = 0,283
-     CI (99.9%): [17,485, 17,619] (assumes normal distribution)
+     17,166 ±(99.9%) 0,188 ms/op [Average]
+     (min, avg, max) = (16,304, 17,166, 21,290), stdev = 0,796
+     CI (99.9%): [16,978, 17,354] (assumes normal distribution)
      */
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
@@ -160,9 +162,9 @@ public class Benchmarks {
 
     /**
      Result "cz.richter.david.astroants.Benchmarks.concurrentInputMapParser":
-     8,670 ±(99.9%) 0,098 ms/op [Average]
-     (min, avg, max) = (7,864, 8,670, 10,462), stdev = 0,415
-     CI (99.9%): [8,572, 8,768] (assumes normal distribution)
+     8,681 ±(99.9%) 0,275 ms/op [Average]
+     (min, avg, max) = (7,849, 8,681, 18,952), stdev = 1,162
+     CI (99.9%): [8,406, 8,955] (assumes normal distribution)
      */
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)

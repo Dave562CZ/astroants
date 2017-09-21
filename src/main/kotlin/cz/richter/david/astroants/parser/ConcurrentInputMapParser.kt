@@ -19,7 +19,7 @@ class ConcurrentInputMapParser @Autowired constructor(private val mapLocationPar
         val gridSize = Math.sqrt(inputMapSettings.areas.size.toDouble()).toInt()
         return StreamSupport.stream(indexedArrayListSpliterator(inputMapSettings.areas.withIndex(), inputMapSettings.areas.size), true)
                 .map { mapLocationParser.parse(it.index % gridSize, it.index / gridSize, it.value) }
-                .sorted(Comparator.comparing { location: MapLocation ->  location.x % gridSize + location.y * gridSize  })
+                .sorted(Comparator.comparing { location: MapLocation ->  location.x + location.y * gridSize  })
                 .collect(Collectors.toList())
     }
 

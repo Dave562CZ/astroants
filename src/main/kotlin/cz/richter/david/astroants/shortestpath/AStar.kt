@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
 
 @Component
-class AStar @Autowired constructor(
-        @Qualifier("concurrentHipsterGraphCreator")
-        private val hipsterGraphCreator: HipsterGraphCreator
-): ShortestPathFinder {
+class AStar(private val hipsterGraphCreator: HipsterGraphCreator): ShortestPathFinder {
 
     override fun find(map: List<MapLocation>, astroants: Astroants, sugar: Sugar): List<Direction> {
         val graphSize = Math.sqrt(map.size.toDouble()).toInt()

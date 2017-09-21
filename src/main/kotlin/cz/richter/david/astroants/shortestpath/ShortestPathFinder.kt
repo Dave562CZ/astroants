@@ -9,6 +9,6 @@ interface ShortestPathFinder {
     fun find(map: List<MapLocation>, astroants: Astroants, sugar: Sugar): List<Direction>
     companion object {
         fun convertCoordinatesToIndex(x: Int, y: Int, graphSize: Int) =
-                x % graphSize + y * graphSize
+                x + y * graphSize
     }
 }

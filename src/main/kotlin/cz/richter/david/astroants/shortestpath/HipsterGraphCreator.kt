@@ -13,7 +13,7 @@ interface HipsterGraphCreator {
      * This function constructs [HipsterDirectedGraph] using [List]<[MapLocation]>
      *
      * IMPORTANT NOTE: for correct functionality of this function the [map] parameter must be sorted in order according to rows in grid
-     * so every item index can be obtained using this function item.x % [graphEdgeSize] + item.y * [graphEdgeSize]
+     * so every item index can be obtained using this function item.x + item.y * [graphEdgeSize]
      * and Math.sqrt(map.size) must be integer value i. e. the map must be square
      */
     fun constructHipsterGraph(map: List<MapLocation>, graphEdgeSize: Int): HipsterDirectedGraph<MapLocation, Pair<Int, Direction>>

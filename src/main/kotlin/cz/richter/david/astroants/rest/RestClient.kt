@@ -9,6 +9,6 @@ import cz.richter.david.astroants.model.World
  * and putting [ResultPath] to REST endpoint
  */
 interface RestClient {
-    fun getSettings(): World
+    fun getWorld(): World
     fun putResult(id: String, result: ResultPath): ResultResponse
 }
